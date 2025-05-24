@@ -1,11 +1,11 @@
 {
 	"name": "chatter-api",
 	"version": "1.0.0",
-	"description": "RESTful API built on top of venom-bot",
+	"description": "Combined WhatsApp Bot and Web Scraping API",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js",
-		"dev": "nodemon server.js",
+		"start": "node index.js",
+		"dev": "nodemon index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
@@ -20,6 +20,8 @@
 		"cors": "^2.8.5",
 		"express": "^4.21.2",
 		"node-cache": "^5.1.2",
+		"path": "^0.12.7",
+		"puppeteer": "^24.9.0",
 		"sharp": "^0.34.2",
 		"venom-bot": "^5.3.0"
 	},

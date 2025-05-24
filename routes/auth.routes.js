@@ -29,7 +29,7 @@ module.exports = (
 
 			// Check if QR code is ready
 			let attempts = 0;
-			const maxAttempts = 10; // Maximum attempts to wait for QR
+			const maxAttempts = 300; // Maximum attempts to wait for QR
 			const interval = 2000; // Interval between checks in milliseconds
 
 			// Check if client wants image only response (from query parameter)
