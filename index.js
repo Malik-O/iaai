@@ -146,6 +146,11 @@ app.get("/", (req, res) => {
 				endpoints: ["/scrape/*"],
 				status: "Available",
 			},
+			{
+				name: "Telegram Bot",
+				endpoints: ["/telegram/*"],
+				status: "Available",
+			},
 		],
 	});
 });
@@ -170,10 +175,14 @@ const messageRoutes = require("./routes/message.routes")(
 // Import scrapper routes
 const scrapperRoutes = require("./routes/scrapper.routes")();
 
+// Import telegram routes
+const telegramRoutes = require("./routes/telegram.routes")();
+
 // Use routes
 app.use("/auth", authRoutes);
 app.use("/messages", messageRoutes);
 app.use("/scrape", scrapperRoutes);
+app.use("/telegram", telegramRoutes);
 
 // Start the server
 app.listen(port, async () => {
@@ -188,6 +197,10 @@ app.listen(port, async () => {
 	console.log(
 		`   - Vehicle Details: http://localhost:${port}/scrape/vehicle/YOUR_VEHICLE_ID~US`,
 	);
+	console.log(`3. Telegram Bot API:`);
+	console.log(`   - Initialize: http://localhost:${port}/telegram/init`);
+	console.log(`   - Send Message: http://localhost:${port}/telegram/send`);
+	console.log(`   - Status: http://localhost:${port}/telegram/status`);
 	console.log(`-----------------------------`);
 
 	// Uncomment to auto-initialize WhatsApp bot on server start
