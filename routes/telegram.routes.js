@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
 const { TelegramClient } = require("telegram");
 const { StringSession } = require("telegram/sessions");
 const { NewMessage } = require("telegram/events");
@@ -312,10 +313,18 @@ module.exports = () => {
 				});
 			}
 
-			const result = await clientInstance.sendMessage(username, {
-				message: caption || "",
-				file: mediaUrl,
-			});
+			
+			const {data: {url, success}} = await axios.post(
+				"http://localhost:3000/util/crop_img",
+				{ imageUrl: mediaUrl },
+				{ headers: { "Content-Type": "application/json" } },
+			);
+			if (success) {
+				var result = await clientInstance.sendMessage(username, {
+						message: caption || "",
+						file: url,
+				});
+			}
 
 			res.json({
 				status: "success",

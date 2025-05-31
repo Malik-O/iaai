@@ -1,4 +1,5 @@
 const express = require("express");
+const axios = require("axios");
 const router = express.Router();
 
 module.exports = (client, isInitialized) => {
@@ -36,45 +37,19 @@ module.exports = (client, isInitialized) => {
 						result = await client().sendText(to, message.body);
 						break;
 					case "image":
-						result = await client().sendImage(
-							to,
-							message.href,
-							message.filename || "image",
-							message.caption || "",
+						const {data: {url, success}} = await axios.post(
+							"http://localhost:3000/util/crop_img",
+							{ imageUrl: message.href },
+							{ headers: { "Content-Type": "application/json" } },
 						);
-						break;
-					case "file":
-						result = await client().sendFile(
-							to,
-							message.href,
-							message.filename || "file",
-							message.caption || "",
-						);
-						break;
-					case "sticker":
-						result = await client().sendImageAsSticker(
-							to,
-							message.href,
-						);
-						break;
-					case "audio":
-						result = await client().sendVoice(to, message.href);
-						break;
-					case "video":
-						result = await client().sendVideo(
-							to,
-							message.href,
-							message.filename || "video",
-							message.caption || "",
-						);
-						break;
-					case "location":
-						result = await client().sendLocation(
-							to,
-							message.latitude,
-							message.longitude,
-							message.title || "",
-						);
+						if (success) {
+							result = await client().sendImage(
+								to,
+								url,
+								message.filename || "image",
+									message.caption || "",
+							);
+						}
 						break;
 					case "link":
 						result = await client().sendLinkPreview(

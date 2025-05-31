@@ -178,11 +178,15 @@ const scrapperRoutes = require("./routes/scrapper.routes")();
 // Import telegram routes
 const telegramRoutes = require("./routes/telegram.routes")();
 
+// Import util routes
+const utilRoutes = require("./routes/util.routes")();
+
 // Use routes
 app.use("/auth", authRoutes);
 app.use("/messages", messageRoutes);
 app.use("/scrape", scrapperRoutes);
 app.use("/telegram", telegramRoutes);
+app.use("/util", utilRoutes);
 
 // Start the server
 app.listen(port, async () => {
