@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"user_experience_metrics.stability.exited_cleanly":false,"variations_crash_streak":20}
+=======
+{"user_experience_metrics.stability.exited_cleanly":false,"variations_crash_streak":0}
+>>>>>>> 23bdb00dbe99c19d5dee6175788f86328b21a3b9

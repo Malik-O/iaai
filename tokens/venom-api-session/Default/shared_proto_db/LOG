@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2025/06/04-18:34:36.392 7980 Reusing MANIFEST E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\shared_proto_db/MANIFEST-000001
 2025/06/04-18:34:36.392 7980 Recovering log #3
 2025/06/04-18:34:36.393 7980 Reusing old log E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\shared_proto_db/000003.log 
+=======
+2025/06/01-19:32:47.731 355 Reusing MANIFEST /app/tokens/venom-api-session/Default/shared_proto_db/MANIFEST-000001
+2025/06/01-19:32:47.731 355 Recovering log #3
+2025/06/01-19:32:47.731 355 Reusing old log /app/tokens/venom-api-session/Default/shared_proto_db/000003.log 
+>>>>>>> 23bdb00dbe99c19d5dee6175788f86328b21a3b9
