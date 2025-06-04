@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-2025/06/04-18:17:23.803 7d5c Reusing MANIFEST E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\Service Worker\Database/MANIFEST-000001
-2025/06/04-18:17:23.804 7d5c Recovering log #3
-2025/06/04-18:17:24.240 7d5c Reusing old log E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\Service Worker\Database/000003.log 
-=======
-2025/06/01-19:08:23.869 55 Creating DB /app/tokens/venom-api-session/Default/Service Worker/Database since it was missing.
-2025/06/01-19:08:23.873 55 Reusing MANIFEST /app/tokens/venom-api-session/Default/Service Worker/Database/MANIFEST-000001
->>>>>>> 23bdb00dbe99c19d5dee6175788f86328b21a3b9

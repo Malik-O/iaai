@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-2025/06/04-18:17:24.265 547c Reusing MANIFEST E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\shared_proto_db/MANIFEST-000001
-2025/06/04-18:17:24.266 547c Recovering log #3
-2025/06/04-18:17:24.773 547c Reusing old log E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\shared_proto_db/000003.log 
-=======
-2025/06/01-19:08:20.131 55 Creating DB /app/tokens/venom-api-session/Default/shared_proto_db since it was missing.
-2025/06/01-19:08:20.151 55 Reusing MANIFEST /app/tokens/venom-api-session/Default/shared_proto_db/MANIFEST-000001
->>>>>>> 23bdb00dbe99c19d5dee6175788f86328b21a3b9
