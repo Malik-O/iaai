@@ -74,7 +74,9 @@ const initVenom = async () => {
 			.create({
 				session: "venom-api-session",
 				useChrome: false,
-				headless: true,
+				headless: 'new',
+				browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
+				executablePath: '/usr/bin/google-chrome-stable',
 				args: ["--headless=new", "--no-sandbox"],
 				disableWelcome: true,
 				catchQR: (base64Qr, asciiQR, attempts) => {
