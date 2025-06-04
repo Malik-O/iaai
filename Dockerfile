@@ -52,7 +52,7 @@ WORKDIR /usr/src/app
 
 # نسخ ملفات الباكيج وتثبيت الحزم
 COPY package*.json ./
-RUN npm install
+RUN npm install --force
 
 # نسخ باقي الملفات
 COPY . .
