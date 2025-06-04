@@ -294,7 +294,7 @@ function getVehicleImages() {
 		".gallery, .image-gallery, .vehicle-images",
 	);
 	if (gallery) {
-		const imgElements = gallery.querySelectorAll("img");
+		const imgElements = gallery.querySelectorAll("img[src^='https://']");
 		imgElements.forEach((img) => {
 			if (img.src) {
 				const enhancedSrc = enhanceImageResolution(img.src);
@@ -305,7 +305,7 @@ function getVehicleImages() {
 
 	// Strategy 2: Look for high-res images or thumbnails with data attributes
 	const allImgs = document.querySelectorAll(
-		"img[data-src], img.vehicle-img, .thumbnail img",
+		"img[data-src][src^='https://'], img.vehicle-img[src^='https://'], .thumbnail img[src^='https://']",
 	);
 	allImgs.forEach((img) => {
 		// Prefer data-src for high resolution if available
@@ -319,7 +319,7 @@ function getVehicleImages() {
 	// Strategy 3: Look specifically for IAAI's vehicle image thumbnails
 	// This is the selector provided by the user
 	const thumbContainerImgs = document.querySelectorAll(
-		".vehicle-image__thumb-container img",
+		".vehicle-image__thumb-container img[src^='https://']",
 	);
 	console.log(
 		`Found ${thumbContainerImgs.length} images with .vehicle-image__thumb-container selector`,

@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const venom = require("venom-bot");
 const path = require("path");
 
+require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -181,12 +182,17 @@ const telegramRoutes = require("./routes/telegram.routes")();
 // Import util routes
 const utilRoutes = require("./routes/util.routes")();
 
+// Import scrape and send routes
+const scrapeAndSendRoutes = require("./routes/scrape_and_send.routes");
+
 // Use routes
 app.use("/auth", authRoutes);
 app.use("/messages", messageRoutes);
 app.use("/scrape", scrapperRoutes);
 app.use("/telegram", telegramRoutes);
 app.use("/util", utilRoutes);
+// Use scrape-and-send routes at root level
+app.use("/scrape-and-send", scrapeAndSendRoutes);
 
 // Start the server
 app.listen(port, async () => {

@@ -14,7 +14,7 @@ module.exports = (client, isInitialized) => {
 			}
 
 			const { to, messages } = req.body;
-
+			console.log({ to, messages });
 			if (
 				!to ||
 				!messages ||
@@ -32,46 +32,60 @@ module.exports = (client, isInitialized) => {
 			for (const message of messages) {
 				let result;
 
-				switch (message.type) {
-					case "text":
-						result = await client().sendText(to, message.body);
-						break;
-					case "image":
-						const {data: {url, success}} = await axios.post(
-							"http://localhost:3000/util/crop_img",
-							{ imageUrl: message.href },
-							{ headers: { "Content-Type": "application/json" } },
-						);
-						if (success) {
-							result = await client().sendImage(
-								to,
-								url,
-								message.filename || "image",
-									message.caption || "",
+				try {
+					switch (message.type) {
+						case "text":
+							result = await client().sendText(to, message.body);
+							break;
+						case "image":
+							const {
+								data: { url, success },
+							} = await axios.post(
+								"http://localhost:3000/util/crop_img",
+								{ imageUrl: message.href },
+								{
+									headers: {
+										"Content-Type": "application/json",
+									},
+								},
 							);
-						}
-						break;
-					case "link":
-						result = await client().sendLinkPreview(
-							to,
-							message.url,
-							message.title || "",
-						);
-						break;
-					default:
-						results.push({
-							type: message.type,
-							status: "error",
-							message: "Unsupported message type",
-						});
-						continue;
+							if (success) {
+								result = await client().sendImage(
+									to,
+									url,
+									message.filename || "image",
+									message.caption || "",
+								);
+							}
+							break;
+						case "link":
+							result = await client().sendLinkPreview(
+								to,
+								message.url,
+								message.title || "",
+							);
+							break;
+						default:
+							results.push({
+								type: message.type,
+								status: "error",
+								message: "Unsupported message type",
+							});
+							continue;
+					}
+					results.push({
+						type: message.type,
+						status: "success",
+						result,
+					});
+				} catch (err) {
+					results.push({
+						type: message.type,
+						status: "error",
+						message: err.message,
+					});
+					continue;
 				}
-
-				results.push({
-					type: message.type,
-					status: "success",
-					result,
-				});
 			}
 
 			res.json({

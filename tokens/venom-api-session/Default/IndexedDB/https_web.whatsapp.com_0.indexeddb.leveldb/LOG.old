@@ -1,0 +1,19 @@
+2025/06/04-18:17:28.148 3f3c Reusing MANIFEST E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/06/04-18:17:28.149 3f3c Recovering log #329
+2025/06/04-18:17:28.833 3f3c Reusing old log E:\After Military\كرم تركيا\scrapper\chatter\tokens\venom-api-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000329.log 
+2025/06/04-18:17:30.803 5bec Level-0 table #337: started
+2025/06/04-18:17:31.005 5bec Level-0 table #337: 649941 bytes OK
+2025/06/04-18:17:31.071 5bec Delete type=0 #329
+2025/06/04-18:17:31.089 8218 Manual compaction at level-0 from '\x00-\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00.\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/06/04-18:17:32.283 8218 Compacting 1@1 + 4@2 files
+2025/06/04-18:17:33.062 8218 Generated table #338@1: 90462 keys, 2244530 bytes
+2025/06/04-18:17:33.976 8218 Generated table #339@1: 35900 keys, 2283740 bytes
+2025/06/04-18:17:34.879 8218 Generated table #340@1: 21638 keys, 2188009 bytes
+2025/06/04-18:17:35.346 8218 Generated table #341@1: 38214 keys, 1410736 bytes
+2025/06/04-18:17:35.346 8218 Compacted 1@1 + 4@2 files => 8127015 bytes
+2025/06/04-18:17:35.424 8218 compacted to: files[ 0 0 4 0 0 0 0 ]
+2025/06/04-18:17:35.425 8218 Delete type=2 #331
+2025/06/04-18:17:35.425 8218 Delete type=2 #332
+2025/06/04-18:17:35.425 8218 Delete type=2 #333
+2025/06/04-18:17:35.425 8218 Delete type=2 #334
+2025/06/04-18:17:35.425 8218 Delete type=2 #337

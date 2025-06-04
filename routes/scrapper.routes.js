@@ -9,6 +9,10 @@ const {
 const {
 	scrapeVehicleDetailsPage,
 } = require("../scrapper/main_scrapper/vehicle_details_scraper");
+const {
+	scrapeCaIaaiVehicleDetailsPage,
+	scrapeCopartVehicleDetailsPage,
+} = require("../utils/scrapper");
 
 // This mapping can be extended if other shorthand URLs are needed
 const SITE_MAP = {
@@ -68,26 +72,47 @@ module.exports = () => {
 	});
 
 	// Route for scraping vehicle details
-	router.get("/vehicle/:id", async (req, res) => {
-		const vehicleId = req.params.id;
-		if (!vehicleId) {
-			return res.status(400).json({ error: "Vehicle ID is required." });
+	router.get("/vehicle", async (req, res) => {
+		const vehicleHref = req.query.href;
+		if (!vehicleHref) {
+			return res.status(400).json({ error: "Vehicle Href is required." });
 		}
 
 		// Construct the target URL for the vehicle detail page
 		// Example: https://www.iaai.com/VehicleDetail/42781060~US (assuming id might contain ~US or similar)
-		const targetUrl = `${SITE_MAP.iaai_vehicle_detail_base}${vehicleId}`;
+		// const targetUrl = `${SITE_MAP.iaai_vehicle_detail_base}${vehicleId}`;
+		const targetUrl = vehicleHref;
 
 		console.log(
-			`Received request for /scrape/vehicle/${vehicleId}. Target URL: ${targetUrl}`,
+			`Received request for /scrape/vehicle. Target URL: ${targetUrl}`,
 		);
 
-		const result = await scrapeVehicleDetailsPage(targetUrl);
+		let result;
+		try {
+			const url = new URL(targetUrl);
+			const domain = url.hostname;
+
+			if (domain === "www.iaai.com") {
+				result = await scrapeVehicleDetailsPage(targetUrl);
+			} else if (domain === "ca.iaai.com") {
+				result = await scrapeCaIaaiVehicleDetailsPage(targetUrl);
+			} else if (domain === "www.copart.com") {
+				result = await scrapeCopartVehicleDetailsPage(targetUrl);
+			} else {
+				return res.status(400).json({ error: "Unsupported domain." });
+			}
+		} catch (error) {
+			console.error("Error processing vehicle request:", error);
+			return res.status(500).json({
+				error: "Failed to process request.",
+				details: error.message,
+			});
+		}
 
 		if (result.success) {
 			return res.json({
 				message: result.message,
-				vehicleId: vehicleId,
+				// vehicleId: vehicleId, // vehicleId is not defined anymore, consider removing or adapting
 				data: result.data,
 			});
 		} else {
@@ -101,7 +126,7 @@ module.exports = () => {
 					: 500;
 			return res.status(statusCode).json({
 				error: result.message,
-				vehicleId: vehicleId,
+				// vehicleId: vehicleId, // vehicleId is not defined anymore, consider removing or adapting
 				details: result.details,
 			});
 		}

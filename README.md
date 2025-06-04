@@ -165,6 +165,7 @@ npm start
     -   يعيد حالة اتصال العميل بتيليجرام
 
 -   **تسجيل الخروج**: `POST /telegram/logout`
+
     -   يقوم بتسجيل الخروج وإزالة بيانات الجلسة
 
 -   **حالة الاتصال التفصيلية**: `GET /telegram/connection-status`
@@ -178,6 +179,63 @@ npm start
             "message": "Telegram client is connected and authorized"
         }
         ```
+
+### إرسال بيانات السيارة مباشرة عبر واتساب أو تيليجرام بعد استخراجها
+
+تمت إضافة نقطتي نهاية جديدتين تتيحان لك استخراج بيانات السيارة من رابط وإرسالها مباشرة عبر واتساب أو تيليجرام.
+
+#### إرسال بيانات السيارة عبر واتساب
+
+-   **المسار:** `POST /scrape-and-send-via-whatsapp`
+-   **الوصف:** يستقبل رابط صفحة السيارة (`href`) ورقم المستلم (`to`) ويقوم باستخراج بيانات السيارة ثم إرسالها كنص عبر واتساب.
+-   **المعلمات المطلوبة في body:**
+    ```json
+    {
+    	"href": "رابط صفحة السيارة",
+    	"to": "رقم_واتساب_بصيغة_الدولة@c.us"
+    }
+    ```
+-   **مثال للاستخدام:**
+    ```javascript
+    fetch("http://localhost:3000/scrape-and-send-via-whatsapp", {
+    	method: "POST",
+    	headers: { "Content-Type": "application/json" },
+    	body: JSON.stringify({
+    		href: "https://www.copart.com/lot/89378785/clean-title-2016-audi-a3-premium-ca-van-nuys",
+    		to: "971XXXXXXXXX@c.us",
+    	}),
+    })
+    	.then((res) => res.json())
+    	.then((data) => console.log(data));
+    ```
+
+#### إرسال بيانات السيارة عبر تيليجرام
+
+-   **المسار:** `POST /scrape-and-send-via-telegram`
+-   **الوصف:** يستقبل رابط صفحة السيارة (`href`) واسم المستخدم أو رقم المستلم في تيليجرام (`to`) ويقوم باستخراج بيانات السيارة ثم إرسالها كنص عبر تيليجرام.
+-   **المعلمات المطلوبة في body:**
+    ```json
+    {
+    	"href": "رابط صفحة السيارة",
+    	"to": "username_or_phone"
+    }
+    ```
+-   **مثال للاستخدام:**
+
+    ```javascript
+    fetch("http://localhost:3000/scrape-and-send-via-telegram", {
+    	method: "POST",
+    	headers: { "Content-Type": "application/json" },
+    	body: JSON.stringify({
+    		href: "https://www.copart.com/lot/89378785/clean-title-2016-audi-a3-premium-ca-van-nuys",
+    		to: "username_or_phone",
+    	}),
+    })
+    	.then((res) => res.json())
+    	.then((data) => console.log(data));
+    ```
+
+-   **ملاحظة:** يجب أن يكون رقم واتساب أو معرف تيليجرام صحيحًا ومضافًا في النظام حتى يتم الإرسال بنجاح.
 
 ## أمثلة للاستخدام
 
@@ -325,8 +383,8 @@ fetch("http://localhost:3000/telegram/chat/username?limit=100&offset=50")
 
 ```javascript
 fetch("http://localhost:3000/telegram/connection-status")
-    .then(response => response.json())
-    .then(data => console.log(data));
+	.then((response) => response.json())
+	.then((data) => console.log(data));
 ```
 
 ## الحصول على API ID و API Hash لتيليجرام

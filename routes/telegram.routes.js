@@ -201,36 +201,6 @@ module.exports = () => {
 		}
 	});
 
-	// Get client instance
-	const getClient = () => clientInstance;
-
-	// Check if client is initialized
-	const isInitialized = () => isInitializedFlag;
-
-	// Initialize client route
-	router.post("/init", async (req, res) => {
-		try {
-			const { apiId, apiHash, phoneNumber } = req.body;
-
-			if (!apiId || !apiHash || !phoneNumber) {
-				return res.status(400).json({
-					status: "error",
-					message: "API ID, API Hash, and phone number are required",
-				});
-			}
-
-			const result = await initClient(apiId, apiHash, phoneNumber);
-			res.json(result);
-		} catch (error) {
-			console.error("Error in init route:", error);
-			res.status(500).json({
-				status: "error",
-				message: "Failed to initialize Telegram client",
-				error: error.message,
-			});
-		}
-	});
-
 	// Initialize with session route
 	router.post("/init-session", async (req, res) => {
 		try {
